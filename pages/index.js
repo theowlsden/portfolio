@@ -1,82 +1,105 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import { Menu, Transition } from '@headlessui/react'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import Landing from '../components/Landing'
+import Project_section from '../components/Project_section'
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <nav className=" bg-green-500 
+      md:w-24 md:flex md:py-8 md:justify-center md:items-end md:min-h-screen 
+      fixed py-4 w-full
+      ">
+         <ul id="links" className="hidden md:block" >
+        <li>
+          <Link href="/">
+            <a>home</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/about">
+            <a>about</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/">
+            <a>projects</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/">
+            <a>contact</a>
+          </Link>
+        </li>
+      </ul>
+      
+      <Menu as="div" className="md:hidden">
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+        <Menu.Button className="mx-4">
+          <svg viewBox="0 0 100 80" width="24" height="24">
+            <rect width="80" height="16" rx="8"></rect>
+            <rect y="30" width="60" height="16" rx="8"></rect>
+            <rect y="60" width="80" height="16" rx="8"></rect>
+          </svg>
+        </Menu.Button>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="absolute left-12 w-9/12 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none flex flex-col">
+              <Menu.Item className="">
+                {({ active }) => (
+                  <Link href="/">
+                    <a  className="w-full px-2 py-2 text-sm">home</a>
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link href="/">
+                    <a  className="w-full px-2 py-2 text-sm">about</a>
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link href="/">
+                    <a  className="w-full px-2 py-2 text-sm">projects</a>
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link href="/">
+                    <a  className="w-full px-2 py-2 text-sm">contact</a>
+                  </Link>
+                )}
+              </Menu.Item>
+              
+          </Menu.Items>
+        </Transition>
+      </Menu>
+      </nav>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+      <main className="md:ml-24">
+        {/*  className="md:py-4 md:px-12 md:ml-24 py-16 px-8" */}
+      <Landing/>
+      <Project_section/>
       </main>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
+     
     </div>
   )
+
 }
